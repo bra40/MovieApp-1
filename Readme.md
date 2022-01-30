@@ -10,3 +10,6 @@
 #### - Wed 6pm
 #### - Fri - 1pm class
 #### - Sun - 12am
+
+
+### Temp document we edited: https://docs.google.com/document/d/1PZhm1oegOIHtkkTpHBFmsT41KTzYeT0p-AhR2JQd0rc/edit
