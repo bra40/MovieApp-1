@@ -1,0 +1,33 @@
+.userPage {
+    height: 100vh;
+    min-height: 100vh;
+
+    color: black;
+    background-color: Azure;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .wrapper {
+        button {
+            width: 100px;
+            height: 50px;
+        }
+
+        input {
+            display: none;
+        }
+    }
+
+    &.active {
+        .wrapper {
+            input {
+                display: flex;
+                width: 200px;
+                height: 20px;
+                margin-top: 20px;
+            }
+        }
+    }
+}
