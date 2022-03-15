@@ -11,5 +11,7 @@
 #### - Fri - 1pm class
 #### - Sun - 12am
 
+# Graph Networks
+
 
 ### Temp document we edited: https://docs.google.com/document/d/1PZhm1oegOIHtkkTpHBFmsT41KTzYeT0p-AhR2JQd0rc/edit

@@ -1,6 +1,7 @@
 import './app.scss';
 import React, {useState, useEffect} from 'react';
 import UserPage from './Components/UserPage/UserPage';
+import VisNetwork from './Components/VisNetwork/VisNetwork';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
     return (
         <div>
             <div className='app'>
+                <VisNetwork/>
                 <UserPage/>
             </div>
         </div>
