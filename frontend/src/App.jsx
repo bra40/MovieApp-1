@@ -23,13 +23,9 @@ function App() {
 
     return (
         <div>
-            {(data !== 201) ? (
-                <p>ERROR: {data}</p>
-            ) : (
-                <div className='app'>
-                   <UserPage/>
-                </div>
-            )}
+            <div className='app'>
+                <UserPage/>
+            </div>
         </div>
     );
 }
