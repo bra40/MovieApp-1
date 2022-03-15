@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./landingpage.scss"
 
 export default class LandingPage extends Component {
     render() {
