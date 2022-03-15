@@ -26,7 +26,6 @@ function App() {
         <div>
             <div className='app'>
                 <VisNetwork/>
-                <UserPage/>
             </div>
         </div>
     );
