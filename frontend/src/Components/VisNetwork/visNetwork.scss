@@ -1,10 +1,13 @@
-.vis-network:focus{
-  outline: solid;
-}
-
-.vis-network{
-  display:block;
-  border: 5px solid;
-  border-color: rgba(255, 80, 83, 0.611);
-  background-color:rgba(172, 206, 232, 0.549);
+.visNetwork {
+  .wrapper {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+  
+    .vis-network{
+      border: 5px solid;
+      border-color: rgba(255, 80, 83, 0.611);
+      background-color:rgba(172, 206, 232, 0.549);
+    }
+  }
 }

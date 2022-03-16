@@ -10,17 +10,14 @@ export default class UserPage extends Component {
       isButtonClicked: false,
     }
 
-    this.getUserInput = this.getUserInput.bind(this);
+    this.onButtonClicked = this.onButtonClicked.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
   }
 
-  getUserInput() {
+  onButtonClicked() {
     this.setState(prevState => ({
       isButtonClicked: !prevState.isButtonClicked,
-      userInput: 'hello'
     }));
-
-    console.log(this.state.userInput);
   }
 
   // updates the current state of the text box
@@ -39,7 +36,7 @@ export default class UserPage extends Component {
     return (
       <div className={"userPage " + (this.state.isButtonClicked && 'active')}>
         <div className="wrapper">
-          <button onClick={this.getUserInput}>
+          <button onClick={this.onButtonClicked}>
             {this.state.isButtonClicked ? 'Done' : 'Add Node'}
           </button>
         </div>

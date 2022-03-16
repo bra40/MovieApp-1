@@ -38,6 +38,8 @@ const data = {
   edges: edges
 };
 
+let numNodes = 6;
+
 const options = {
     autoResize: true,
     height: '100%',
@@ -47,32 +49,75 @@ const options = {
   // Initialize your network!
   class VisNetwork extends Component {
     constructor() {
-    super();
-    this.network = {};
-    this.appRef = createRef();
-  }
-  
-  componentDidMount() {
-    this.network = new Network(this.appRef.current, data, options);
-  }
-  
-  render() {
-  
-  let containerStyle = {  //define container width and height.
-     width:"400px",
-     height:"400px"
-  }
+      super();
 
-  window.onresize = function() {
-    setInterval(function() {
-      Network.fit();
-    }, 2000);
-  };
+      this.state = {
+        userInput: '',
+        isButtonClicked: false,
+        nodeNum: 6
+      }
   
-  return (
-     <div style={containerStyle} ref={this.appRef} />   
-  );
-  }
+      this.onButtonClicked = this.onButtonClicked.bind(this);
+      this.onInputChange = this.onInputChange.bind(this);
+
+      this.network = {};
+      this.appRef = createRef();
+    }
+
+    // updated whether or not the Add Node button was clicked
+    onButtonClicked() {
+      numNodes = numNodes + 1;
+
+      this.setState(prevState => ({
+        isButtonClicked: !prevState.isButtonClicked,
+        nodeNum: numNodes
+      }));
+
+      nodes.add([
+        {id: this.state.nodeNum, label: 'Film 6'}
+      ]);
+    }
+  
+    // updates the current state of the text box
+    onInputChange(event) {
+      const target = event.target;
+      const value = target.value;
+  
+      this.setState({
+        userInput: value
+      });
+    }
+  
+    componentDidMount() {
+      this.network = new Network(this.appRef.current, data, options);
+    }
+    
+    render() {
+      let containerStyle = {  //define container width and height.
+        width:"500px",
+        height:"500px",
+      }
+
+      window.onresize = function() {
+        setInterval(function() {
+          Network.fit();
+        }, 2000);
+      };
+      
+      return (
+        <div className="visNetwork">
+          <div className="wrapper">
+            <div style={containerStyle} ref={this.appRef} />   
+          </div>
+
+          <div className="wrapper">
+            <button onClick={this.onButtonClicked}>
+              {this.state.isButtonClicked ? 'Done' : 'Add Node'}
+            </button>
+          </div>
+        </div>
+      );
+    }
   }
   
   export default VisNetwork;
