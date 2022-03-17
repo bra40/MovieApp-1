@@ -38,13 +38,17 @@ const data = {
   edges: edges
 };
 
-let numNodes = 6;
-
 const options = {
     autoResize: true,
     height: '100%',
     width: '100%'    
   };
+
+// some globals to help with user input
+let id1ToAddEdge = '';
+let id2ToAddEdge = '';
+let movieIdToAdd = '';
+let movieNameToAdd = '';
   
   // Initialize your network!
   class VisNetwork extends Component {
@@ -53,39 +57,62 @@ const options = {
 
       this.state = {
         userInput: '',
-        isButtonClicked: false,
-        nodeNum: 6
+        isNodeButtonClicked: false,
+        isEdgeButtonClicked: false,
       }
   
-      this.onButtonClicked = this.onButtonClicked.bind(this);
+      this.onNodeButtonClicked = this.onNodeButtonClicked.bind(this);
+      this.onEdgeButtonClicked = this.onEdgeButtonClicked.bind(this);
       this.onInputChange = this.onInputChange.bind(this);
 
       this.network = {};
       this.appRef = createRef();
     }
 
-    // updated whether or not the Add Node button was clicked
-    onButtonClicked() {
-      numNodes = numNodes + 1;
-
+    // updates whether or not the Add Node button was clicked and adds a node
+    onNodeButtonClicked() {
       this.setState(prevState => ({
-        isButtonClicked: !prevState.isButtonClicked,
-        nodeNum: numNodes
+        isNodeButtonClicked: !prevState.isNodeButtonClicked,
       }));
 
-      nodes.add([
-        {id: this.state.nodeNum, label: 'Film 6'}
-      ]);
+      if(this.state.isNodeButtonClicked == true) {
+        nodes.add([
+          {id: movieIdToAdd, label: movieNameToAdd}
+        ]);
+      }
+    }
+
+    // updates whether or not the Add Edge button was clicked and adds an edge
+    onEdgeButtonClicked() {
+      this.setState(prevState => ({
+        isEdgeButtonClicked: !prevState.isEdgeButtonClicked
+      }));
+
+      if(this.state.isEdgeButtonClicked == true) {
+        edges.add([
+          {from: id1ToAddEdge, to: id2ToAddEdge}
+        ]);
+      }
     }
   
-    // updates the current state of the text box
+    // updates the current state of the text boxes
     onInputChange(event) {
       const target = event.target;
       const value = target.value;
-  
-      this.setState({
-        userInput: value
-      });
+      const name = target.className;
+
+      if(name == 'id1') {
+        id1ToAddEdge = value;
+      }
+      else if(name == 'id2') {
+        id2ToAddEdge = value;
+      }
+      else if(name == 'movieId') {
+        movieIdToAdd = value;
+      }
+      else if(name == 'movieName') {
+        movieNameToAdd = value;
+      }
     }
   
     componentDidMount() {
@@ -110,10 +137,24 @@ const options = {
             <div style={containerStyle} ref={this.appRef} />   
           </div>
 
-          <div className="wrapper">
-            <button onClick={this.onButtonClicked}>
-              {this.state.isButtonClicked ? 'Done' : 'Add Node'}
+          <div className="container">
+            <button className='addNode' onClick={this.onNodeButtonClicked}>
+              {this.state.isNodeButtonClicked ? 'Done' : 'Add Node'}
             </button>
+
+            <button className='addEdge' onClick={this.onEdgeButtonClicked}>
+              {this.state.isEdgeButtonClicked ? 'Done' : 'Add Edge'}
+            </button>
+          </div>
+
+          <div className={"container " + (this.state.isEdgeButtonClicked && 'active')}>
+            <input type='text' className='id1' placeholder='Enter first node to add edge' onChange={this.onInputChange}></input>
+            <input type='text' className='id2' placeholder='Enter second node to add edge' onChange={this.onInputChange}></input>
+          </div>
+
+          <div className={"container " + (this.state.isNodeButtonClicked && 'active')}>
+            <input type='text' className='movieName' placeholder='Enter the move name' onChange={this.onInputChange}></input>
+            <input type='text' className='movieId' placeholder='Enter the movie ID' onChange={this.onInputChange}></input>
           </div>
         </div>
       );
